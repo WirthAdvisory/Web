@@ -1335,66 +1335,137 @@
       </p>
 
       <div class="contact-form fade-in">
-        <!-- BREVO FORM EMBED POINT -->
-        <!-- Replace everything inside this div with your Brevo embed code -->
-        <!-- Brevo: Marketing Platform > Forms > Create Form > Embed > copy snippet here -->
 
-        <div class="form-row">
-          <div class="form-group">
-            <label for="fname">First Name</label>
-            <input type="text" id="fname" name="FIRSTNAME" placeholder="First name" autocomplete="given-name">
+        <!-- Brevo form styles — scoped overrides to match brand -->
+        <style>
+          #sib-container { background: transparent !important; border: none !important; max-width: 100% !important; text-align: left !important; }
+          .sib-form { background: transparent !important; text-align: left !important; }
+          .sib-form-container { max-width: 100% !important; }
+          .sib-form .form__entry { margin-bottom: 0; }
+          .sib-form .entry__label {
+            font-family: Aptos, 'Segoe UI', Calibri, sans-serif !important;
+            font-size: 11px !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.16em !important;
+            text-transform: uppercase !important;
+            color: #0B3830 !important;
+            margin-bottom: 7px !important;
+            display: block;
+          }
+          .sib-form .input {
+            font-family: Aptos, 'Segoe UI', Calibri, sans-serif !important;
+            font-size: 15px !important;
+            color: #0B3830 !important;
+            background: #FFFDF9 !important;
+            border: 1.5px solid #ECE6DC !important;
+            border-radius: 2px !important;
+            padding: 11px 14px !important;
+            width: 100% !important;
+            box-sizing: border-box !important;
+            outline: none !important;
+            transition: border-color 0.2s !important;
+          }
+          .sib-form .input:focus { border-color: #0B3830 !important; }
+          .sib-form .input::placeholder { color: #aaa !important; font-size: 14px !important; }
+          .sib-form-block { padding: 0 !important; }
+          .sib-form-block__button {
+            font-family: Aptos, 'Segoe UI', Calibri, sans-serif !important;
+            font-size: 13px !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.14em !important;
+            text-transform: uppercase !important;
+            background: #FBB90F !important;
+            color: #0B3830 !important;
+            border: none !important;
+            border-radius: 2px !important;
+            padding: 15px 48px !important;
+            cursor: pointer !important;
+            display: block !important;
+            margin: 0 auto !important;
+            transition: opacity 0.2s !important;
+          }
+          .sib-form-block__button:hover { opacity: 0.88 !important; }
+          #success-message { background-color: #e7faf0 !important; border-color: #13ce66 !important; max-width: 100% !important; }
+          #error-message { max-width: 100% !important; }
+          .entry__error { font-size: 12px !important; font-family: Aptos, 'Segoe UI', sans-serif !important; }
+          .sib-hide-loader-icon { display: none; }
+        </style>
+
+        <!-- Two-column row: First + Last -->
+        <div class="form-row" style="margin-bottom: 20px;">
+          <div class="form-group" style="margin-bottom:0;">
+            <label style="font-family: Aptos,'Segoe UI',Calibri,sans-serif; font-size:11px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#0B3830; display:block; margin-bottom:7px;">First Name</label>
+            <input class="input" form="sib-form" maxlength="200" type="text" id="FIRSTNAME" name="FIRSTNAME" autocomplete="given-name" placeholder="First name" data-required="true" required style="font-family:Aptos,'Segoe UI',Calibri,sans-serif;font-size:15px;color:#0B3830;background:#FFFDF9;border:1.5px solid #ECE6DC;border-radius:2px;padding:11px 14px;width:100%;box-sizing:border-box;outline:none;" />
           </div>
-          <div class="form-group">
-            <label for="lname">Last Name</label>
-            <input type="text" id="lname" name="LASTNAME" placeholder="Last name" autocomplete="family-name">
+          <div class="form-group" style="margin-bottom:0;">
+            <label style="font-family: Aptos,'Segoe UI',Calibri,sans-serif; font-size:11px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#0B3830; display:block; margin-bottom:7px;">Last Name</label>
+            <input class="input" form="sib-form" maxlength="200" type="text" id="LASTNAME" name="LASTNAME" autocomplete="family-name" placeholder="Last name" data-required="true" required style="font-family:Aptos,'Segoe UI',Calibri,sans-serif;font-size:15px;color:#0B3830;background:#FFFDF9;border:1.5px solid #ECE6DC;border-radius:2px;padding:11px 14px;width:100%;box-sizing:border-box;outline:none;" />
           </div>
         </div>
 
-        <div class="form-row">
-          <div class="form-group">
-            <label for="email">Work Email</label>
-            <input type="email" id="email" name="EMAIL" placeholder="you@company.com" autocomplete="email">
+        <!-- Two-column row: Email + Company -->
+        <div class="form-row" style="margin-bottom: 20px;">
+          <div class="form-group" style="margin-bottom:0;">
+            <label style="font-family: Aptos,'Segoe UI',Calibri,sans-serif; font-size:11px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#0B3830; display:block; margin-bottom:7px;">Work Email</label>
+            <input class="input" form="sib-form" type="email" id="EMAIL" name="EMAIL" autocomplete="email" placeholder="you@company.com" data-required="true" required style="font-family:Aptos,'Segoe UI',Calibri,sans-serif;font-size:15px;color:#0B3830;background:#FFFDF9;border:1.5px solid #ECE6DC;border-radius:2px;padding:11px 14px;width:100%;box-sizing:border-box;outline:none;" />
           </div>
-          <div class="form-group">
-            <label for="company">Company</label>
-            <input type="text" id="company" name="COMPANY" placeholder="Company name">
-          </div>
-        </div>
-
-        <div class="form-row">
-          <div class="form-group">
-            <label for="revenue">Revenue Range</label>
-            <select id="revenue" name="REVENUE">
-              <option value="" disabled selected>Select range</option>
-              <option>$10M – $25M</option>
-              <option>$25M – $50M</option>
-              <option>$50M – $100M</option>
-              <option>$100M – $200M</option>
-              <option>Other</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label for="topic">Primary Topic</label>
-            <select id="topic" name="TOPIC">
-              <option value="" disabled selected>What's most pressing?</option>
-              <option>Operational scale-up</option>
-              <option>AI / Applied Intelligence adoption</option>
-              <option>Revenue operations</option>
-              <option>General advisory</option>
-              <option>Not sure yet</option>
-            </select>
+          <div class="form-group" style="margin-bottom:0;">
+            <label style="font-family: Aptos,'Segoe UI',Calibri,sans-serif; font-size:11px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#0B3830; display:block; margin-bottom:7px;">Company</label>
+            <input class="input" form="sib-form" maxlength="200" type="text" id="name" name="COMPANY:name" autocomplete="organization" placeholder="Company name" data-required="true" required style="font-family:Aptos,'Segoe UI',Calibri,sans-serif;font-size:15px;color:#0B3830;background:#FFFDF9;border:1.5px solid #ECE6DC;border-radius:2px;padding:11px 14px;width:100%;box-sizing:border-box;outline:none;" />
           </div>
         </div>
 
-        <div class="form-group">
-          <label for="message">Anything you'd like to share upfront? <span style="font-weight:400;opacity:.6;">(optional)</span></label>
-          <textarea id="message" name="MESSAGE" placeholder="What's the moment you're in?"></textarea>
+        <!-- Two-column row: Title + (spacer) -->
+        <div class="form-row" style="margin-bottom: 20px;">
+          <div class="form-group" style="margin-bottom:0;">
+            <label style="font-family: Aptos,'Segoe UI',Calibri,sans-serif; font-size:11px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#0B3830; display:block; margin-bottom:7px;">Your Title</label>
+            <input class="input" form="sib-form" maxlength="200" type="text" id="JOB_TITLE" name="JOB_TITLE" autocomplete="organization-title" placeholder="CEO, President, Founder..." style="font-family:Aptos,'Segoe UI',Calibri,sans-serif;font-size:15px;color:#0B3830;background:#FFFDF9;border:1.5px solid #ECE6DC;border-radius:2px;padding:11px 14px;width:100%;box-sizing:border-box;outline:none;" />
+          </div>
+          <div class="form-group" style="margin-bottom:0; visibility:hidden;"></div>
         </div>
 
-        <div class="form-submit">
-          <button type="submit" class="btn-primary">Request a Conversation</button>
-          <p class="form-note">No pitch deck. No intake form maze. Just a direct conversation.</p>
+        <!-- Full-width: Message -->
+        <div class="form-group" style="margin-bottom: 28px;">
+          <label style="font-family: Aptos,'Segoe UI',Calibri,sans-serif; font-size:11px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#0B3830; display:block; margin-bottom:7px;">Anything you'd like to share upfront? <span style="font-weight:400;opacity:.6;">(optional)</span></label>
+          <textarea class="input" form="sib-form" id="NOTE" name="NOTE" placeholder="What's the moment you're in?" rows="4" style="font-family:Aptos,'Segoe UI',Calibri,sans-serif;font-size:15px;color:#0B3830;background:#FFFDF9;border:1.5px solid #ECE6DC;border-radius:2px;padding:11px 14px;width:100%;box-sizing:border-box;outline:none;resize:vertical;min-height:100px;"></textarea>
         </div>
+
+        <!-- The actual Brevo form — hidden fields + submit button -->
+        <div id="sib-form-container" class="sib-form-container">
+          <div id="error-message" class="sib-form-message-panel" style="display:none; font-family:Aptos,sans-serif; font-size:14px; text-align:left; color:#661d1d; background-color:#ffeded; border:1px solid #ff4949; border-radius:3px; padding:12px 16px; margin-bottom:16px;">
+            Your information could not be saved. Please try again.
+          </div>
+          <div id="success-message" class="sib-form-message-panel" style="display:none; font-family:Aptos,sans-serif; font-size:14px; text-align:left; color:#085229; background-color:#e7faf0; border:1px solid #13ce66; border-radius:3px; padding:12px 16px; margin-bottom:16px;">
+            Thank you — we'll be in touch shortly.
+          </div>
+
+          <div id="sib-container" class="sib-container--large sib-container--vertical">
+            <form id="sib-form" method="POST" action="https://a1133863.sibforms.com/v2/serve/MUIFALOuHRMFTzQxV1qe4PluPbVqWwz3_ca1YoJsUzmuyWyftZLCYFL5EH2P2HkFamShGlCQ9RtFvCHDHchFZLO7xS1S0Mx129LjDog9mS2fFtymeTaUisQJlhKNYiEiXuyBO5UTsSJWjyAdNKKWlIwb8-ymTuWJyxUH_i1ERo63FIRyedP9x-WB8ueZKD5ZvgpRRq_6QNJ33M45kw==" data-type="subscription">
+              <input type="text" name="email_address_check" value="" class="input--hidden" style="display:none;">
+              <input type="hidden" name="locale" value="en">
+
+              <div style="text-align:center;">
+                <button class="sib-form-block__button sib-form-block__button-with-loader" type="submit" style="font-family:Aptos,'Segoe UI',Calibri,sans-serif;font-size:13px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;background:#FBB90F;color:#0B3830;border:none;border-radius:2px;padding:15px 48px;cursor:pointer;transition:opacity 0.2s;">
+                  <svg class="icon clickable__icon progress-indicator__icon sib-hide-loader-icon" viewBox="0 0 512 512" style="display:none;"><path d="M460.116 373.846l-20.823-12.022c-5.541-3.199-7.54-10.159-4.663-15.874 30.137-59.886 28.343-131.652-5.386-189.946-33.641-58.394-94.896-95.833-161.827-99.676C261.028 55.961 256 50.751 256 44.352V20.309c0-6.904 5.808-12.337 12.703-11.982 83.556 4.306 160.163 50.864 202.11 123.677 42.063 72.696 44.079 162.316 6.031 236.832-3.14 6.148-10.75 8.461-16.728 5.01z" /></svg>
+                  Request a Conversation
+                </button>
+                <p style="margin-top:14px;font-size:12px;color:rgba(11,56,48,0.45);font-family:Aptos,'Segoe UI',sans-serif;">No pitch deck. No intake form maze. Just a direct conversation.</p>
+              </div>
+            </form>
+          </div>
+        </div>
+
+        <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
+        <script>
+          window.REQUIRED_CODE_ERROR_MESSAGE = 'Please choose a country code';
+          window.LOCALE = 'en';
+          window.EMAIL_INVALID_MESSAGE = window.SMS_INVALID_MESSAGE = "Please enter a valid email address.";
+          window.REQUIRED_ERROR_MESSAGE = "This field cannot be left blank.";
+          window.GENERIC_INVALID_MESSAGE = "The information provided is invalid. Please review the field format and try again.";
+          var AUTOHIDE = Boolean(0);
+        </script>
+        <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
+
       </div>
     </div>
   </section>
