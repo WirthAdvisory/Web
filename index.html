@@ -1391,7 +1391,17 @@
           .sib-hide-loader-icon { display: none; }
         </style>
 
-        <!-- Two-column row: First + Last -->
+        <!-- Branded confirmation — shown after successful submission -->
+        <div id="wa-form-confirmation" style="display:none; text-align:center; padding: 48px 32px;">
+          <svg viewBox="0 0 52 52" width="52" height="52" style="display:block;margin:0 auto 24px;">
+            <circle cx="26" cy="26" r="25" fill="none" stroke="#FBB90F" stroke-width="2"/>
+            <path d="M14 26l8 8 16-16" fill="none" stroke="#FBB90F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p style="font-family:Cambria,Georgia,serif;font-size:22px;font-weight:700;color:#0B3830;margin-bottom:12px;">Thank you — we'll be in touch shortly.</p>
+          <p style="font-family:Aptos,'Segoe UI',sans-serif;font-size:15px;color:#4A4A4A;line-height:1.6;">No pitch deck. No intake form maze. Just a direct conversation.</p>
+        </div>
+
+        <div id="wa-form-fields">
         <div class="form-row" style="margin-bottom: 20px;">
           <div class="form-group" style="margin-bottom:0;">
             <label style="font-family: Aptos,'Segoe UI',Calibri,sans-serif; font-size:11px; font-weight:700; letter-spacing:0.16em; text-transform:uppercase; color:#0B3830; display:block; margin-bottom:7px;">First Name</label>
@@ -1455,6 +1465,8 @@
           </div>
         </div>
 
+        </div><!-- end wa-form-fields -->
+
         <link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
         <script>
           window.REQUIRED_CODE_ERROR_MESSAGE = 'Please choose a country code';
@@ -1465,6 +1477,41 @@
           var AUTOHIDE = Boolean(0);
         </script>
         <script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
+
+        <script>
+          // Show branded confirmation on successful Brevo submission
+          document.addEventListener('DOMContentLoaded', function() {
+            var form = document.getElementById('sib-form');
+            if (!form) return;
+
+            form.addEventListener('submit', function() {
+              // Wait for Brevo to process, then check for success
+              var checkSuccess = setInterval(function() {
+                var successPanel = document.getElementById('success-message');
+                if (successPanel && successPanel.style.display !== 'none' && successPanel.style.display !== '') {
+                  clearInterval(checkSuccess);
+                  showConfirmation();
+                }
+              }, 300);
+
+              // Fallback — show after 4 seconds regardless
+              setTimeout(function() {
+                clearInterval(checkSuccess);
+                showConfirmation();
+              }, 4000);
+            });
+
+            function showConfirmation() {
+              // Hide all form fields
+              var formFields = document.getElementById('wa-form-fields');
+              if (formFields) formFields.style.display = 'none';
+
+              // Show branded confirmation
+              var conf = document.getElementById('wa-form-confirmation');
+              if (conf) conf.style.display = 'block';
+            }
+          });
+        </script>
 
       </div>
     </div>
