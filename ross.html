@@ -118,14 +118,17 @@ footer a{color:var(--wa-muted);text-decoration:underline;text-underline-offset:3
 <div class="wrap">
 
   <!-- Compact lockup (no descriptor): renders at 232px, below the 320px legibility threshold. -->
-  <svg class="lockup" viewBox="95 144 505 55" role="img" aria-label="Wirth Advisory">
-    <g transform="translate(80 122) scale(1.16)">
-      <polyline points="18,32 34,72 50,46 66,72" fill="none" stroke="#FFE5D2" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"/>
-      <polyline points="66,72 82,24" fill="none" stroke="#FBB90F" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"/>
-    </g>
-    <line x1="232" y1="152" x2="232" y2="196" stroke="#FFE5D2" stroke-opacity="0.22" stroke-width="1"/>
-    <text x="268" y="188" font-family="Cambria, Georgia, serif" font-size="38" font-weight="700" letter-spacing="1.9" fill="#FFE5D2">WIRTH ADVISORY</text>
-  </svg>
+  <!-- viewBox sized to the mark+wordmark's actual rendered bbox (measured via getBBox) plus padding — the prior box clipped both. -->
+  <a href="https://www.Wirth-Advisory.com" aria-label="Wirth Advisory — home" style="display:inline-block;text-decoration:none;">
+    <svg class="lockup" viewBox="95 144 587 68" aria-hidden="true">
+      <g transform="translate(80 122) scale(1.16)">
+        <polyline points="18,32 34,72 50,46 66,72" fill="none" stroke="#FFE5D2" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"/>
+        <polyline points="66,72 82,24" fill="none" stroke="#FBB90F" stroke-width="9" stroke-linejoin="round" stroke-linecap="round"/>
+      </g>
+      <line x1="232" y1="152" x2="232" y2="196" stroke="#FFE5D2" stroke-opacity="0.22" stroke-width="1"/>
+      <text x="268" y="188" font-family="Cambria, Georgia, serif" font-size="38" font-weight="700" letter-spacing="1.9" fill="#FFE5D2">WIRTH ADVISORY</text>
+    </svg>
+  </a>
 
   <p class="eyebrow">Good to meet you</p>
   <h1>Ross N. Wirth</h1>
@@ -163,6 +166,10 @@ footer a{color:var(--wa-muted);text-decoration:underline;text-underline-offset:3
       <div class="field">
         <label for="x-email">Email</label>
         <input id="x-email" name="email" type="email" autocomplete="email" inputmode="email" required>
+      </div>
+      <div class="field">
+        <label for="x-cell">Cell <span style="text-transform:none;letter-spacing:0">(optional)</span></label>
+        <input id="x-cell" name="cell" type="tel" autocomplete="tel" inputmode="tel" placeholder="(555) 123-4567">
       </div>
       <div class="field">
         <label for="x-company">Company</label>
@@ -208,6 +215,11 @@ document.getElementById('exchange').addEventListener('submit', function (e) {
   var lastName = nameParts.slice(1).join(' ') || firstName;
   var noteVal = form.note.value.trim();
 
+  // Brevo's SMS attribute expects digits only, country code included, no leading + or 0.
+  // Bare 10-digit input is assumed US/Canada and gets a "1" prefixed.
+  var cellDigits = form.cell.value.replace(/\D/g, '');
+  if (cellDigits.length === 10) cellDigits = '1' + cellDigits;
+
   var params = new URLSearchParams();
   params.set('email_address_check', form.email_address_check.value);
   params.set('locale', 'en');
@@ -217,6 +229,7 @@ document.getElementById('exchange').addEventListener('submit', function (e) {
   params.set('COMPANY:name', form.company.value.trim());
   params.set('NOTE', noteVal ? 'Met at: ' + noteVal : '');
   params.set('SOURCE', 'business-card-qr');
+  if (cellDigits) params.set('SMS', cellDigits);
 
   btn.disabled = true;
   btn.textContent = 'Sending…';
