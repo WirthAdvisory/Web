@@ -111,6 +111,14 @@ footer{
 }
 footer a{color:var(--wa-muted);text-decoration:underline;text-underline-offset:3px}
 @media (min-width:520px){ .wrap{padding:56px 32px 64px} h1{font-size:46px} }
+@media (min-width:860px){
+  .wrap{max-width:760px}
+  .lower{display:flex;align-items:flex-start;gap:40px}
+  .lower .details{flex:0 0 320px;margin-top:0}
+  .lower .exchange{flex:1;margin-top:0}
+  .details{margin-top:40px}
+  .exchange{margin-top:40px}
+}
 </style>
 </head>
 <body>
@@ -144,6 +152,7 @@ footer a{color:var(--wa-muted);text-decoration:underline;text-underline-offset:3
   </button>
   <p class="saved" id="saved" role="status" aria-live="polite"></p>
 
+  <div class="lower">
   <dl class="details">
     <div class="row"><dt>Email</dt><dd><a href="mailto:Ross@Wirth-Advisory.com">Ross@Wirth-Advisory.com</a></dd></div>
     <div class="row"><dt>Cell</dt><dd><a href="tel:+15154511438">+1.515.451.1438</a></dd></div>
@@ -183,6 +192,7 @@ footer a{color:var(--wa-muted);text-decoration:underline;text-underline-offset:3
     </form>
     <p class="exchange-status" id="exchange-status" role="status" aria-live="polite"></p>
   </section>
+  </div>
 
   <footer>
     <a href="https://www.Wirth-Advisory.com">www.Wirth-Advisory.com</a> · Chicago, IL
